@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package packageBk;
+package packageBkWork;
 
 
 import java.util.logging.Level;
@@ -14,31 +14,56 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class bankOfKigali {
+
+public class Chantalwork {
     
     public static void main(String[] args) {
-        System.getProperty("webdriver.gecko.driver","C:\\Program Files\\selenium-server-standalone\\geckodriver-v0.23.0-win64\\geckodriver.exe");
+// TODO code application logic here
+
+System.getProperty("webdriver.gecko.driver","C:\\Program Files\\selenium-server-standalone\\geckodriver-v0.23.0-win64\\geckodriver.exe");
 
         WebDriver driver = new FirefoxDriver();
         driver.get("https://www.bk.rw");
-        WebElement link1, link2, link3, link4;
-        //link =driver.findElement(By.linkText("personal"));
-        link1 =driver.findElement(By.xpath("//a[@href='https://www.bk.rw/personal']"));
-        link1.click();
-                link2 =driver.findElement(By.xpath("//a[@href='https://www.bk.rw/personal/checking-saving/personal-current']"));
-         link2.click();
+        WebElement link, table;
+        
+       // click on personal tab and view 4 sections driver.findElement(By.xpath("//a[@href='https://www.bk.rw/personal']")).click();
 
-         link3 =driver.findElement(By.xpath("//a[@href='https://www.bk.rw/ways-of-banking/online-banking']"));
-         link3.click();
-         link4=driver.findElement(By.xpath("//a[@href='https://www.bk.rw/online-services/apply-for-online-banking']"));
-         link4.click();
+ //Get foreign rate exchange on the footer
+      Float buyingPrice=Float.parseFloat(driver.findElement(By.xpath("/html/body/footer/div[1]/div[4]/div/table/tbody/tr[2]/td[2]")).getText());
+        Float sellingPrice=Float.parseFloat(driver.findElement(By.xpath("/html/body/footer/div[1]/div[4]/div/table/tbody/tr[2]/td[3]")).getText());
+       
+        if((sellingPrice>=800) && (sellingPrice>buyingPrice)){
+            System.out.println("Rates ok");
+            System.out.println(buyingPrice);
+            System.out.println(sellingPrice);
+            
+        }else{
+                        System.out.println("Rates not matching");
+
+        }
+        driver.findElement(By.xpath("//a[@href='https://www.bk.rw/ways-of-banking/online-banking']")).click();
+         
+        
+      
+        driver.findElement(By.xpath("//a[@href='https://www.bk.rw/personal/checking-saving/student-saving-account']")).click();
+        
+         
+//Click on online banking link under current & saving menu
+   driver.findElement(By.xpath("//a[@href='https://www.bk.rw/ways-of-banking/online-banking']")).click();
+        
+  
+//get a link for "Apply now button" then click on it 
+      Link =driver.findElement(By.xpath("//a[@href='https://www.bk.rw/online-services/apply-for-online-banking']"));
+         link.click();
+      
+        
         try{
             Thread.sleep(5000);
             
         }catch(InterruptedException ex){               
      
  
-            Logger.getLogger(bankOfKigali.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Chantalwork.class.getName()).log(Level.SEVERE, null, ex);
         }
         driver.quit();
     }
